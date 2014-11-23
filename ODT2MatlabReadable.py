@@ -9,7 +9,7 @@ targetOutDir = './output/'
 
 def ExitProgram():
     print "[+] End"
-    END = raw_input('..Press Enter key to exit..')
+    raw_input('..Press Enter key to exit..')
     raise SystemExit
 
 
@@ -39,9 +39,9 @@ def CheckInputFile(ODTfile):
 def ColumnsRow(ColsRow):
     # Split and concat the fourth row of the file
     ColsNew = list() # List for the splitted row
-    ColsRow = ColsRow.replace(ColsRow[:12],'') # Remove the first 12 characters
+    ColsRow = ColsRow.replace(ColsRow[:12], '')  # Remove the first 12 characters
     ColsRow = ColsRow.split(' ')
-    ColsRow = filter(lambda name: name.strip(), ColsRow) # Remove spaces from list
+    ColsRow = filter(lambda name: name.strip(), ColsRow)  # Remove spaces from list
     colbuffer = ''
     for column in ColsRow:
         if column[0] != '{' and colbuffer == '':
@@ -57,7 +57,7 @@ def ColumnsRow(ColsRow):
 
 
 def UnitsRow(UnitsRow):
-    ''' Returns a list with the units for the columns  '''
+    """ Returns a list with the units for the columns  """
     UnitsRow = UnitsRow.replace(UnitsRow[:8], '')  # Remove the first 8 characters
     UnitsRow = UnitsRow.split(' ')
     UnitsRow = filter(lambda name: name.strip(), UnitsRow)  # Remove spaces from list
@@ -145,7 +145,6 @@ def main():
     print "[+] " + str(CountFileLines(OutputFileName)) + " lines written in output file"
     Infile.close()
 
-
     if tkMessageBox.askyesno("Matlab Script", "Do you want to create a matlab script too?"):
         MatlabScriptFileName = os.path.split(OutputFileName)[1][:-4]
         
@@ -156,7 +155,7 @@ def main():
         
         HelperFileName = MatlabScriptFileName
         CheckOutputFileExistance(HelperFileName, ".help")
-        HelperFileHandler = open(os.path.join(targetOutDir,HelperFileName)+".help", 'w')
+        HelperFileHandler = open(os.path.join(targetOutDir, HelperFileName)+".help", 'w')
         HelperFile(HelperFileHandler, os.path.split(OutputFileName)[1], COLUMNS, UNITS)
         HelperFileHandler.close()        
     
